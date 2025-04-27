@@ -28,7 +28,7 @@
     </script>
     {% tailwind_css %}
 </head>
-<body class="bg-primary-light dark:bg-primary-dark overflow-x-hidden">
+<body class="bg-primary-light text-opacity-90 dark:bg-primary-dark overflow-x-hidden antialiased">
     <div class = "w-full h-svh">
         <nav class=" w-full py-2 bg-secondary-light dark:bg-secondary-dark shadow-sm ">
             <div class="w-lvw flex items-center justify-around">
@@ -38,14 +38,12 @@
                             <img class="h-7" id="mode" src="{% static "moon.png" %}" alt="">
                         </button>
                         {% if user.is_authenticated %}
-                        <div>
-                            <select class="border border-[#d2eaf6] bg-tertiary-light dark:bg-tertiary-dark font-bold" name="profile-select" id="select" onchange="navigate()" title="{{user.username}}">
+                            <select class="appearance-none border border-[#d2eaf6] bg-tertiary-light dark:bg-tertiary-dark font-bold " name="profile-select" id="select" onchange="navigate()" title="{{user.username}}">
                                 <option value="" class="hidden "> {{user.username}}</option>
                                 <option value="{% url 'yourProfile' %}">Profile</option>
                                 <option value="{% url 'yourPosts' %}">Posts</option>
                                 <option value="{% url 'logout' %}" class="text-red-700">Logout ↪</option>
                             </select>
-                        </div>
                         {% else %}
                         <div>
                             <a class="justify-self-end font-bold" href="{% url 'login' %}">Login</a> |
@@ -59,14 +57,14 @@
             {% if messages %}
                 {% for m in messages %}
                     {% if "error" in m|stringformat:"s" %}
-                        <div class="max-w-lg border border-red-500 px-4 py-3 rounded relative bg-tertiary-light text-black dark:bg-tertiary-dark dark:text-white" role="alert">
+                        <div class="max-w-lg border border-red-500 px-4 py-3 rounded relative bg-tertiary-light text-black  dark:bg-tertiary-dark dark:text-white" role="alert">
                             {% comment %} <strong class="font-bold">Holy smokes!</strong> {% endcomment %}
                             <span class="block sm:inline">{{ m }}</span>
                             <span class="absolute top-0 bottom-0 right-0 px-4 py-3">
                             </span>
                         </div>
                     {% else %}
-                        <div class=" border border-green-500 px-4 py-3 rounded relative" role="alert">
+                        <div class=" border border-green-500 px-4 py-3 rounded relative bg-tertiary-light text-black  dark:bg-tertiary-dark dark:text-white" role="alert">
                             {% comment %} <strong class="font-bold">Holy smokes!</strong> {% endcomment %}
                             <span class="block sm:inline">{{ m }}</span>
                             <span class="absolute top-0 bottom-0 right-0 px-4 py-3">
@@ -84,11 +82,11 @@
               name="q" 
               placeholder="Search posts..." 
               value="{{ request.GET.q }}" 
-              class="w-1/4 px-4 py-2 rounded bg-[#DBF0FA] text-black placeholder-gray-400"
+              class="md:w-1/4 w-3/4 px-4 py-2 rounded bg-[#DBF0FA] text-black placeholder-gray-400"
             />
             <button type="submit"><img src="{% static 'search.png' %}" alt="" srcset="" class="w-10"></button>
           </form>                   
-        <div class="w-3/4 max-w-3xl justify-self-center">
+        <div class="md:w-3/4 w-full max-w-3xl justify-self-center px-1">
             {% block content %}
             {% endblock %}
         </div>
