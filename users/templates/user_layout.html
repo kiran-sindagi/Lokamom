@@ -1,0 +1,111 @@
+{% load static tailwind_tags %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lokamom</title>
+    <script type="module">
+        const toggleBtn = document.getElementById('toggle-theme');
+    const html = document.documentElement;
+    const mode = document.getElementById('mode')
+
+    // Initialize theme from localStorage
+    if (localStorage.getItem('theme') === 'dark') {
+      html.classList.add('dark');
+      mode.src = "{% static 'sun.png' %}"
+    } else {
+      html.classList.remove('dark');
+      mode.src = "{% static 'moon.png' %}"
+    }
+
+    toggleBtn.addEventListener('click', () => {
+      html.classList.toggle('dark');
+      localStorage.setItem('theme', html.classList.contains('dark') ? 'dark' : 'light');
+      window.location.reload()
+    });
+    </script>
+    {% tailwind_css %}
+    <style>
+        input[type="text"],
+        input[type="email"],
+        input[type="password"],
+        textarea {
+            background-color: #fff !important;
+            color: #000 !important;
+            border: 1px solid #555;
+        }
+    </style>
+</head>
+<body class="bg-primary-light text-opacity-90 dark:bg-primary-dark overflow-x-hidden antialiased" style="background-image: url({% static 'greenbg.png' %}); background-size: cover; background-repeat: no-repeat; background-position: center;">
+    <header class="w-full flex justify-between items-center p-4 ">
+                <a href="{% url 'home' %}" class="text-2xl font-bold text-[#004D40]">Lokamom</a>
+                    <nav class="flex items-center justify-between gap-10">
+                        {% comment %} <button id="toggle-theme" class="px-4 py-2  rounded">
+                            <img class="h-7" id="mode" src="{% static "moon.png" %}" alt="">
+                        </button> {% endcomment %}
+                        {% if user.is_authenticated %}
+                            <select class="appearance-none border border-[#d2eaf6] bg-tertiary-light dark:bg-tertiary-dark font-bold p-1" name="profile-select" id="select" onchange="navigate()" title="{{user.username}} ">
+                                <option value="" class="hidden ">{{user.username}}</option>
+                                <option value="{% url 'yourProfile' %}">Profile</option>
+                                <option value="{% url 'yourPosts' %}">Posts</option>
+                                <option value="{% url 'logout' %}" class="text-red-700">Logout ↪</option>
+                            </select>
+                        {% else %}
+                            <div>
+                                <a class="justify-self-end font-bold" href="{% url 'login' %}">Login</a> |
+                                <a class="justify-self-end font-bold" href="{% url 'register' %}">Register</a>
+                            </div>
+                        {% endif %}
+                        <button id="menu-button" class="focus:outline-none">
+                            <!-- Hamburger icon -->
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2"
+                            viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M4 6h16M4 12h16M4 18h16"></path>
+                            </svg>
+                        </button>
+                    </nav>
+    </header>
+        <div class="p-5 flex items-center justify-center">
+            {% if messages %}
+                {% for m in messages %}
+                    {% if "error" in m|stringformat:"s" %}
+                        <div class="max-w-lg border border-red-500 px-4 bg-[rgba(255,0,0,0.5)] py-3 rounded relative  text-black dark:bg-tertiary-dark dark:text-white" role="alert">
+                            {% comment %} <strong class="font-bold">Holy smokes!</strong> {% endcomment %}
+                            <span class="block sm:inline">{{ m }}</span>
+                            <span class="absolute top-0 bottom-0 right-0 px-4 py-3">
+                            </span>
+                        </div>
+                    {% else %}
+                        <div class=" border border-green-500 bg-[rgba(0,255,13,0.5)] px-4 py-3 rounded relative" role="alert">
+                            {% comment %} <strong class="font-bold">Holy smokes!</strong> {% endcomment %}
+                            <span class="block sm:inline">{{ m }}</span>
+                            <span class="absolute top-0 bottom-0 right-0 px-4 py-3">
+                            </span>
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            {% endif %}
+        </div>                 
+        <div class="md:w-3/4 w-full max-w-3xl justify-self-center px-1">
+            {% block content %}
+            {% endblock %}
+        </div>
+    </div>
+</body>
+<script>
+
+    document.cookie = "user_timezone=" + Intl.DateTimeFormat().resolvedOptions().timeZone + ";path=/";
+    
+    function navigate(){
+        const select = document.getElementById('select')
+        const url = select.value
+        if(url){
+            window.location.href = url;
+        }
+    }
+</script>
+</html>
+

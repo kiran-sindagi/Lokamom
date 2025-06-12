@@ -1,0 +1,24 @@
+{% extends 'user_layout.html' %}
+{% block content %}
+{% load crispy_forms_tags %}
+{% if form.errors %}
+<div class="border  px-4 py-3 rounded relative" role="alert">
+    <span class="block sm:inline">There was an error registering you</span>
+    <span class="absolute top-0 bottom-0 right-0 px-4 py-3">
+    </span>
+</div>
+
+{% endif %}
+
+<br>
+    <form action="{% url 'register' %}" method="post">
+        {% csrf_token %}
+        <center>
+            <div class="w-[80vw] sm:w-[20vw] h-auto p-2 shadow-lg rounded-lg opacity-100 flex flex-col text-left backdrop-blur-sm justify-center items-center gap-3 text-black dark:text-white">
+                <h1 class="text-2xl font-bold">Create account</h1>
+                {% crispy form %}
+                <input type="submit" value="Submit" class="font-bold  w-20 rounded-lg p-2 border bg-[#81c698] hover:bg-[#38704a]">
+            </div>
+        </center>
+    </form>
+{% endblock %}

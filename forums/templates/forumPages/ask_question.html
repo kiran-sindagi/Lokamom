@@ -1,0 +1,79 @@
+{% extends "layout.html" %} {% block content %}
+<div class="flex justify-center items-center min-h-[60vh]">
+  <form
+    action=""
+    method="POST"
+    id="ask-question-form"
+    class="bg-white/90 rounded-xl shadow-lg border border-green-200 p-8 w-full max-w-xl backdrop-blur-md"
+  >
+    {% csrf_token %}
+    <h2 class="text-2xl font-extrabold text-green-800 mb-4 text-center">
+      Ask a Question
+    </h2>
+    <label for="text" class="block text-green-800 font-semibold mb-2"
+      >Your Question</label
+    >
+    <textarea
+      placeholder="Type your question here..."
+      name="quest"
+      class="w-full mt-1 h-40 px-4 py-2 rounded-lg border border-green-200 focus:ring-2 focus:ring-green-400 focus:outline-none bg-green-50 text-gray-800 resize-y transition"
+      id="text"
+      maxlength="500"
+      required
+    ></textarea>
+    <div class="flex gap-5 mt-6 justify-center">
+      <button
+        type="submit"
+        class="px-6 py-2 font-bold rounded-lg bg-gradient-to-tr from-green-700 to-green-500 hover:from-green-800 hover:to-green-600 text-white shadow transition"
+      >
+        Submit
+      </button>
+      <a
+        href="{% url 'forums' %}"
+        class="px-6 py-2 rounded-lg bg-green-100 text-green-800 font-bold shadow hover:bg-green-200 transition text-center"
+      >
+        Cancel
+      </a>
+    </div>
+    <div
+      id="message"
+      style="display: none"
+      class="bg-green-700 flex h-10 items-center justify-center rounded-2xl mt-5 opacity-80 text-white"
+    >
+      <p class="font-semibold">
+        Drag the bottom right corner to adjust the size.
+      </p>
+    </div>
+  </form>
+</div>
+<script>
+  document.cookie =
+    "user_timezone=" +
+    Intl.DateTimeFormat().resolvedOptions().timeZone +
+    ";path=/";
+  document
+    .getElementById("ask-question-form")
+    .addEventListener("submit", function () {
+      setTimeout(() => {
+        window.location.href = "{% url 'forums' %}";
+      }, 100);
+    });
+  const text = document.getElementById("text");
+  window.addEventListener("pageshow", function (event) {
+    if (!text) return;
+    const navType = performance.getEntriesByType("navigation")[0]?.type;
+    if (event.persisted || navType === "back_forward") {
+      text.value = "";
+    }
+  });
+  const msg = document.getElementById("message");
+  text.addEventListener("input", () => {
+    if (text.value.length > 400) {
+      msg.style.display = "flex";
+      setTimeout(() => {
+        msg.style.display = "none";
+      }, 5000);
+    }
+  });
+</script>
+{% endblock %}

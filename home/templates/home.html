@@ -1,0 +1,43 @@
+{% extends 'home_layout.html' %} {% load static %} {% block content %}
+<style>
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  .letter {
+    opacity: 0;
+    animation: fadeIn 2s ease forwards;
+  }
+</style>
+
+{# Animated text at the bottom of the page #}
+<div
+  class="fixed bottom-6 left-1/2 transform -translate-x-1/2 w-full max-w-4xl z-50"
+>
+  <div
+    id="animatedText"
+    class="text-[#8cdfc6] text-center font-bold text-2xl md:text-3xl px-4 max-w-3xl mx-auto"
+  >
+    <!-- Animated text injected via JS -->
+  </div>
+</div>
+
+<script>
+  window.addEventListener("DOMContentLoaded", () => {
+    const sentence = `As a Mom, at whatever stage you are, you are doing great!`;
+    const container = document.getElementById("animatedText");
+
+    [...sentence].forEach((char, index) => {
+      const span = document.createElement("span");
+      span.textContent = char;
+      span.className = "letter";
+      span.style.animationDelay = `${index * 0.025}s`;
+      container.appendChild(span);
+    });
+  });
+</script>
+{% endblock content %}

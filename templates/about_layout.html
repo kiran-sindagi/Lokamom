@@ -1,0 +1,102 @@
+{% load static tailwind_tags %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <title>Lokamom</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% tailwind_css %}
+</head>
+<body class="font-sans backdrop:blur-sm" style="background-image: url({% static 'greenbg.png' %}); background-size: cover; background-repeat: repeat; background-position: center;">
+
+    <!-- Header -->
+    <header class="w-full flex justify-between items-center p-4  text-white">
+        <a href="{% url 'home' %}" class="text-2xl font-bold text-[#004D40]">Lokamom</a>
+
+        <!-- Sidebar Trigger -->
+        <nav class="text-[#004D40] flex justify-between items-center">
+        <button id="menu-button" class="focus:outline-none">
+            <!-- Hamburger icon -->
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2"
+            viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path stroke-linecap="round" stroke-linejoin="round"
+                d="M4 6h16M4 12h16M4 18h16"></path>
+            </svg>
+        </button>
+        </nav>
+    </header>
+
+    <!-- Mobile Sidebar -->
+        <div id="dropdown-menu" class="absolute top-16 right-0 text-center z-10 bg-green-100/80 backdrop-blur-xl shadow-lg shadow-[#A8E6CF] rounded-md p-4 space-y-2 transition-all duration-300 ease-in-out transform scale-95 opacity-0 pointer-events-none w-44 h-[91vh]">
+      <a
+        href="{% url 'about' %}"
+        class="block font-semibold text-green-900 hover:text-green-700 transition"
+        >About</a
+      >
+      <hr class="border-green-700" />
+      <a
+        href="{% url 'articles' %}"
+        class="block font-semibold text-green-900 hover:text-green-700 transition"
+        >Articles</a
+      >
+      <hr class="border-green-700" />
+      <a
+        href="{% url 'forums' %}"
+        class="block font-semibold text-green-900 hover:text-green-700 transition"
+        >Forums</a
+      >
+      <hr class="border-green-700" />
+      <a
+        href="#"
+        class="block font-semibold text-green-900 hover:text-green-700 transition"
+        >Women in spotlight</a
+      >
+      <hr class="border-green-700" />
+      <a
+        href="#"
+        class="block font-semibold text-green-900 hover:text-green-700 transition">Work/Career</a>
+      <hr class="border-green-700" />
+      <a
+        href="#"
+        class="block font-semibold text-green-900 hover:text-green-700 transition"
+        >Sessions</a
+      >
+      <hr class="border-green-700" />
+      <a
+        href="#"
+        class="block font-semibold text-green-900 hover:text-green-700 transition"
+        >Contribute</a
+      >
+      <hr class="border-green-700" />
+    </div>
+
+    <!-- Main Content -->
+    <main class="container mx-auto flex items-center md:justify-center h-[90vh] flex-col">
+        {% block content %}
+        {% endblock %}
+    </main>
+
+    <!-- Footer -->
+    {% comment %} <footer class="w-full flex justify-center items-center p-6 bg-green-600 text-white">
+        <p>&copy; 2023 MomSupport. All rights reserved.</p>
+    </footer> {% endcomment %}
+</body>
+<script>
+    const menuButton = document.getElementById("menu-button");
+    const dropdownMenu = document.getElementById("dropdown-menu");
+
+    menuButton.addEventListener("click", () => {
+        const isHidden = dropdownMenu.classList.contains("opacity-0");
+
+        if (isHidden) {
+        dropdownMenu.classList.remove("opacity-0", "scale-95", "pointer-events-none");
+        dropdownMenu.classList.add("opacity-100", "scale-100");
+        } else {
+        dropdownMenu.classList.remove("opacity-100", "scale-100");
+        dropdownMenu.classList.add("opacity-0", "scale-95", "pointer-events-none");
+        }
+    });
+
+</script>
+</html>
