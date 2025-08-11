@@ -1,111 +1,118 @@
 {% load static tailwind_tags %}
 {% load static %}
+
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lokamom</title>
-    <script type="module">
-        const toggleBtn = document.getElementById('toggle-theme');
-    const html = document.documentElement;
-    const mode = document.getElementById('mode')
-
-    // Initialize theme from localStorage
-    if (localStorage.getItem('theme') === 'dark') {
-      html.classList.add('dark');
-      mode.src = "{% static 'sun.png' %}"
-    } else {
-      html.classList.remove('dark');
-      mode.src = "{% static 'moon.png' %}"
-    }
-
-    toggleBtn.addEventListener('click', () => {
-      html.classList.toggle('dark');
-      localStorage.setItem('theme', html.classList.contains('dark') ? 'dark' : 'light');
-      window.location.reload()
-    });
-    </script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     {% tailwind_css %}
     <style>
-        input[type="text"],
-        input[type="email"],
-        input[type="password"],
-        textarea {
-            background-color: #fff !important;
-            color: #000 !important;
-            border: 1px solid #555;
+        /* This prevents the page from jumping when the scrollbar is hidden */
+        body.overflow-hidden {
+            padding-right: 15px; /* Adjust this value to your scrollbar's width */
         }
     </style>
 </head>
-<body class="bg-primary-light text-opacity-90 dark:bg-primary-dark overflow-x-hidden antialiased" style="background-image: url({% static 'greenbg.png' %}); background-size: cover; background-repeat: no-repeat; background-position: center;">
-    <header class="w-full flex justify-between items-center p-4 ">
-                <a href="{% url 'home' %}" class="text-2xl font-bold text-[#004D40]">Lokamom</a>
-                    <nav class="flex items-center justify-between gap-10">
-                        {% comment %} <button id="toggle-theme" class="px-4 py-2  rounded">
-                            <img class="h-7" id="mode" src="{% static "moon.png" %}" alt="">
-                        </button> {% endcomment %}
-                        {% if user.is_authenticated %}
-                            <select class="appearance-none border border-[#d2eaf6] bg-tertiary-light dark:bg-tertiary-dark font-bold p-1" name="profile-select" id="select" onchange="navigate()" title="{{user.username}} ">
-                                <option value="" class="hidden ">{{user.username}}</option>
-                                <option value="{% url 'yourProfile' %}">Profile</option>
-                                <option value="{% url 'yourPosts' %}">Posts</option>
-                                <option value="{% url 'logout' %}" class="text-red-700">Logout ↪</option>
-                            </select>
-                        {% else %}
-                            <div>
-                                <a class="justify-self-end font-bold" href="{% url 'login' %}">Login</a> |
-                                <a class="justify-self-end font-bold" href="{% url 'register' %}">Register</a>
-                            </div>
-                        {% endif %}
-                        <button id="menu-button" class="focus:outline-none">
-                            <!-- Hamburger icon -->
-                            <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2"
-                            viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                            <path stroke-linecap="round" stroke-linejoin="round"
-                                d="M4 6h16M4 12h16M4 18h16"></path>
-                            </svg>
-                        </button>
-                    </nav>
+<body class="font-sans bg-orange-200">
+
+    <!-- Header -->
+    <header class="w-full flex justify-between items-center p-4 text-white">
+        {% comment %} <a href="{% url 'home' %}" class="text-2xl font-bold text-[#0f766e]">Lokamom</a> {% endcomment %}
+        <a href="{% url 'home' %}"><img src="{% static 'logo-2.png' %}" alt="" class="h-14"></a>
+
+        <!-- Sidebar Trigger Button (Visible on all screen sizes) -->
+        <nav class="text-[#0f766e]">
+            <button id="menu-open-button" class="focus:outline-none z-50">
+                <!-- Hamburger icon -->
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2"
+                    viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                        d="M4 6h16M4 12h16M4 18h16"></path>
+                </svg>
+            </button>
+        </nav>
     </header>
-        <div class="p-5 flex items-center justify-center">
-            {% if messages %}
-                {% for m in messages %}
-                    {% if "error" in m|stringformat:"s" %}
-                        <div class="max-w-lg border border-red-500 px-4 bg-[rgba(255,0,0,0.5)] py-3 rounded relative  text-black dark:bg-tertiary-dark dark:text-white" role="alert">
-                            {% comment %} <strong class="font-bold">Holy smokes!</strong> {% endcomment %}
-                            <span class="block sm:inline">{{ m }}</span>
-                            <span class="absolute top-0 bottom-0 right-0 px-4 py-3">
-                            </span>
-                        </div>
-                    {% else %}
-                        <div class=" border border-green-500 bg-[rgba(0,255,13,0.5)] px-4 py-3 rounded relative" role="alert">
-                            {% comment %} <strong class="font-bold">Holy smokes!</strong> {% endcomment %}
-                            <span class="block sm:inline">{{ m }}</span>
-                            <span class="absolute top-0 bottom-0 right-0 px-4 py-3">
-                            </span>
-                        </div>
-                    {% endif %}
-                {% endfor %}
-            {% endif %}
-        </div>                 
-        <div class="md:w-3/4 w-full max-w-3xl justify-self-center px-1">
-            {% block content %}
-            {% endblock %}
+
+    <!-- Page Overlay -->
+    <!-- This overlay will darken the main content when the sidebar is open -->
+    <div id="overlay" class="fixed inset-0 bg-black bg-opacity-50 z-30 hidden transition-opacity duration-300 ease-in-out"></div>
+
+
+    <!-- Professional Off-Canvas Sidebar -->
+    <!-- It slides in from the right and is hidden by default -->
+    <div id="sidebar-menu" class="fixed top-0 right-0 h-full md:w-4/5 w-full md:max-w-sm z-40 bg-[#ADBCA5] shadow-2xl p-6 space-y-4 transform translate-x-full transition-transform duration-300 ease-in-out">
+        
+        <!-- Sidebar Header with Close Button -->
+        <div class="flex justify-between items-center mb-6">
+            <h2 class="text-xl font-bold text-[#F9F6F2]">Menu</h2>
+            <button id="menu-close-button" class="focus:outline-none text-[#F9F6F2] hover:text-white">
+                <!-- Close (X) icon -->
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" 
+                     viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path>
+                </svg>
+            </button>
         </div>
+
+        <!-- Navigation Links -->
+        <a href="{% url 'about' %}" class="block py-2 px-3 rounded-md font-semibold text-[#F9F6F2] hover:bg-black/10 transition-colors duration-200">About</a>
+        <a href="{% url 'articles' %}" class="block py-2 px-3 rounded-md font-semibold text-[#F9F6F2] hover:bg-black/10 transition-colors duration-200">Articles</a>
+        <a href="{% url 'forums' %}" class="block py-2 px-3 rounded-md font-semibold text-[#F9F6F2] hover:bg-black/10 transition-colors duration-200">Forums</a>
+        <a href="{% url 'WISList' %}" class="block py-2 px-3 rounded-md font-semibold text-[#F9F6F2] hover:bg-black/10 transition-colors duration-200">Women in Spotlight</a>
+        <a href="#" class="block py-2 px-3 rounded-md font-semibold text-[#F9F6F2] hover:bg-black/10 transition-colors duration-200">Work/Career</a>
+        <a href="{% url 'letter' %}" class="block py-2 px-3 rounded-md font-semibold text-[#F9F6F2] hover:bg-black/10 transition-colors duration-200">Sessions</a>
+        <a href="#" class="block py-2 px-3 rounded-md font-semibold text-[#F9F6F2] hover:bg-black/10 transition-colors duration-200">Contribute</a>
     </div>
-</body>
+
+    <!-- Main Content -->
+    <main class="container mx-auto flex items-center md:justify-center h-full pt-16 flex-col">
+        {% block content %}
+        {% endblock %}
+    </main>
+
+    <!-- Footer -->
+    {% comment %} 
+    <footer class="w-full flex justify-center items-center p-6 bg-green-600 text-white">
+        <p>&copy; 2023 MomSupport. All rights reserved.</p>
+    </footer> 
+    {% endcomment %}
+
 <script>
+    // Get all the necessary elements from the DOM
+    const openMenuButton = document.getElementById('menu-open-button');
+    const closeMenuButton = document.getElementById('menu-close-button');
+    const sidebar = document.getElementById('sidebar-menu');
+    const overlay = document.getElementById('overlay');
+    const body = document.body;
 
-    document.cookie = "user_timezone=" + Intl.DateTimeFormat().resolvedOptions().timeZone + ";path=/";
-    
-    function navigate(){
-        const select = document.getElementById('select')
-        const url = select.value
-        if(url){
-            window.location.href = url;
+    // Function to open the sidebar
+    const openSidebar = () => {
+        sidebar.classList.remove('translate-x-full'); // Slide sidebar in
+        overlay.classList.remove('hidden'); // Show overlay
+        body.classList.add('overflow-hidden'); // Prevent scrolling of main content
+    };
+
+    // Function to close the sidebar
+    const closeSidebar = () => {
+        sidebar.classList.add('translate-x-full'); // Slide sidebar out
+        overlay.classList.add('hidden'); // Hide overlay
+        body.classList.remove('overflow-hidden'); // Restore scrolling
+    };
+
+    // Event listeners
+    openMenuButton.addEventListener('click', openSidebar);
+    closeMenuButton.addEventListener('click', closeSidebar);
+    overlay.addEventListener('click', closeSidebar); // Close sidebar when clicking on the overlay
+
+    // Optional: Close sidebar on 'Escape' key press
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && !sidebar.classList.contains('translate-x-full')) {
+            closeSidebar();
         }
-    }
+    });
 </script>
-</html>
 
+</body>
+</html>

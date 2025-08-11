@@ -1,0 +1,66 @@
+{% extends 'home_layout.html' %}
+
+{% block content %}
+<div class="flex flex-col items-center">
+  <h1 class="text-[#0f766e] text-3xl mb-10 font-bold">
+    What We Offer
+  </h1>
+</div>
+
+<!-- Flex container for the cards -->
+<div class="flex flex-wrap gap-8 justify-center items-center w-full h-full">
+
+    <!-- Card 1 -->
+    <div class="relative group flex-1 min-w-[16rem] max-w-xs h-44 bg-[#FFFBF2] rounded-xl text-[#0f766e] flex items-center justify-center shadow-md hover:shadow-xl transition-shadow duration-300">
+        <span class="font-bold text-lg text-center px-3">
+            One on One Session
+        </span>
+        <!-- Pop-up content for Card 1 -->
+        <div class="absolute bottom-full mb-2 left-0 w-full p-4 bg-[#FFFBF2] text-[#0f766e] opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 shadow-xl rounded-xl z-10 text-sm transform translate-y-2 group-hover:translate-y-0">
+            <a href="{% url 'one' %}">
+                A one-on-one counseling session is a private, personal conversation between you and a
+                trained mental health professional (counselor or therapist). It’s a safe, confidential space
+                where you can talk about what’s on your mind—whether it’s stress, confusion, overwhelm,
+                sadness, anxiety, or anything else you're carrying.
+            </a>
+        </div>
+    </div>
+
+    <!-- Card 2 -->
+    <div class="relative group flex-1 min-w-[16rem] max-w-xs h-44 bg-[#FFFBF2] rounded-xl text-[#0f766e] flex items-center justify-center shadow-md hover:shadow-xl transition-shadow duration-300">
+        <span class="font-bold text-lg text-center px-3">
+            Group talk sessions
+        </span>
+        <!-- Pop-up content for Card 2 -->
+        <div class="absolute bottom-full mb-2 left-0 w-full p-4 bg-[#FFFBF2] text-[#0f766e] opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 shadow-xl rounded-xl z-10 text-sm transform translate-y-2 group-hover:translate-y-0">
+            <a href="{% url 'group' %}">
+                Group counseling sessions are relaxed, supportive gatherings where a small group of
+                people—often with similar life experiences—come together to talk, share, and support one
+                another, usually with the gentle guidance of a trained counselor or facilitator.
+                They’re not like classroom lectures or therapy “meetings”—they feel more like a heartfelt
+                conversation in a safe circle, where everyone is heard, seen, and accepted.
+            </a>
+        </div>
+    </div>
+
+    <!-- Card 3 -->
+    <div class="relative group flex-1 min-w-[16rem] max-w-xs h-44 bg-[#FFFBF2] rounded-xl text-[#0f766e] flex items-center justify-center shadow-md hover:shadow-xl transition-shadow duration-300">
+        <span class="font-bold text-lg text-center px-3">
+            Stress management and Life Skills sessions for varied groups
+        </span>
+        <!-- Pop-up content for Card 3 -->
+        <div class="absolute bottom-full mb-2 left-0 w-full p-4 bg-[#FFFBF2] text-[#0f766e] opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 shadow-xl rounded-xl z-10 text-sm transform translate-y-2 group-hover:translate-y-0">
+            <a href="{% url 'stress' %}">
+                A stress management or life skills session for women is a supportive, practical, and often
+                empowering gathering—either one-on-one or in a group—designed to help women cope with
+                daily stress, build emotional strength, and learn essential life tools to manage
+                responsibilities and relationships more confidently.
+                These sessions are especially helpful for women dealing with overwhelm, financial
+                hardship, parenting pressures, emotional burnout, or life transitions (like divorce, loss,
+                or re-entering the workforce).
+            </a>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}

@@ -14,7 +14,7 @@ def loginUser(request):
         user = authenticate(request, username = username, password = password)
         if user is not None:
             login(request, user)
-            return redirect('forums')
+            return redirect('home')
         else:
             messages.success(request, ("There was an error logging in."))
             return redirect('login')

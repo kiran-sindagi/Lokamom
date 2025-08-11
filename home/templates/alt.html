@@ -1,0 +1,153 @@
+{% extends 'home_layout.html' %} 
+{% load static %} 
+
+{% block content %}
+<style>
+  /* Enhanced Keyframes for a more subtle and engaging text animation.
+    This animation fades and slides the letters in from below.
+  */
+  @keyframes slideInFade {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .letter {
+    opacity: 0;
+    display: inline-block; /* Ensures transform works correctly */
+    animation: slideInFade 0.5s ease-out forwards;
+  }
+
+  /* Responsive Masonry Layout:
+    - Starts with a single column on mobile.
+    - Moves to two columns on medium screens.
+    - Expands to three columns on large screens.
+    This provides an optimal viewing experience across all devices.
+  */
+  .masonry {
+    column-count: 1;
+    column-gap: 1.5rem; /* 24px */
+  }
+
+  @media screen and (min-width: 768px) {
+    .masonry {
+      column-count: 2;
+    }
+  }
+
+  @media screen and (min-width: 1024px) {
+    .masonry {
+      column-count: 3;
+    }
+  }
+
+  /* Prevents masonry items from breaking across columns, ensuring
+    each article card is displayed as a whole unit.
+  */
+  .masonry-item {
+    break-inside: avoid;
+    page-break-inside: avoid;
+    margin-bottom: 1.5rem; /* 24px */
+    display: block;
+  }
+</style>
+
+<!-- Main content container with semantic <main> tag for better SEO and accessibility -->
+<main class="container mx-auto px-4">
+
+  <!-- Hero Section: Contains the primary visual and introductory message -->
+  <section class="flex flex-col items-center justify-center text-center my-8 md:my-12">
+    
+    <!-- Responsive Video Player -->
+    <div class="w-full max-w-4xl mx-auto -mt-16 sm:-mt-20">
+      <video autoplay muted loop playsinline class="rounded-2xl shadow-xl w-full" title="Promotional video for Loka Mom">
+        <source src="{% static 'lokamom.mp4' %}" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+    </div>
+
+    <!-- Animated Welcome Text -->
+    <div class="relative my-10 w-full max-w-4xl">
+      <h1 id="animatedText" class="text-teal-700 font-bold text-2xl md:text-3xl lg:text-4xl px-4">
+        <!-- Animated text will be injected here by JavaScript -->
+      </h1>
+    </div>
+
+  </section>
+
+  <hr class="w-full border-t-2 border-teal-100 mb-12">
+
+  <!-- Articles Section: Semantically structured for SEO -->
+  <section aria-labelledby="articles-heading" class="py-10">
+    <h2 id="articles-heading" class="text-4xl md:text-5xl my-4 font-semibold text-teal-800 font-serif text-center">Glimpse Our Articles</h2>
+    
+    <!-- Masonry Grid for Articles -->
+    <div class="masonry mt-12 mb-10">
+      
+      {% for article in article_data %}
+        <!-- Article Card: Enhanced with better styling and hover effects for improved UX -->
+        <article class="masonry-item bg-white rounded-xl shadow-md overflow-hidden flex flex-col justify-between transition-all duration-300 hover:shadow-2xl hover:-translate-y-2">
+          
+          <!-- Article Image: Now includes a descriptive alt tag for SEO -->
+          {% if article.section == '1' %}
+            <img src="{% static 'fives/saree_working.jpg' %}" alt="Image for {{ article.title }}" class="w-full h-auto object-cover">
+          {% elif article.section == '2' %}
+            <img src="{% static 'fives/shutterstock-2.jpg' %}" alt="Image for {{ article.title }}" class="w-full h-auto object-cover">
+          {% elif article.section == '3' %}
+            <img src="{% static 'fives/shutterstock-3.jpg' %}" alt="Image for {{ article.title }}" class="w-full h-auto object-cover">
+          {% elif article.section == '4' %}
+            <img src="{% static 'fives/shutterstock-4.jpg' %}" alt="Image for {{ article.title }}" class="w-full h-auto object-cover">
+          {% elif article.section == '5' %}
+            <img src="{% static 'fives/shutterstock-5.jpg' %}" alt="Image for {{ article.title }}" class="w-full h-auto object-cover">
+          {% endif %}
+          
+          <div class="p-6 flex-grow flex flex-col">
+            <!-- Article Title: Using <h3> for proper heading hierarchy -->
+            <h3 class="font-bold text-xl text-center text-teal-800 mb-4">{{ article.title }}</h3>
+            
+            <!-- Article Preview Text -->
+            <p class="text-gray-700 text-left mb-4 flex-grow">
+              {{ article.preview|safe }}
+            </p>
+
+            <!-- "Read More" Link: Styled as a button for better visibility and UX -->
+            <a href="{% url 'read_article' article.id %}" class="self-center mt-auto inline-block bg-teal-600 text-white font-semibold py-2 px-6 rounded-lg shadow-md hover:bg-teal-700 transition-colors duration-300">
+              Read More
+            </a>
+          </div>
+        </article>
+      {% endfor %}
+    </div>
+  </section>
+
+</main>
+
+<script>
+  // This script runs after the page content is loaded to ensure elements are available.
+  window.addEventListener("DOMContentLoaded", () => {
+    const sentence = `As a Mom, at whatever stage you are, you are doing great!`;
+    const container = document.getElementById("animatedText");
+
+    // Clear any existing content to prevent duplication on page reloads (e.g., with Turbo)
+    container.innerHTML = ''; 
+
+    // Split the sentence into characters and create a styled <span> for each.
+    // The animation delay creates a staggered, letter-by-letter appearance.
+    [...sentence].forEach((char, index) => {
+      const span = document.createElement("span");
+      
+      // Use non-breaking space for actual spaces to ensure they are animated.
+      span.textContent = char === ' ' ? '\u00A0' : char; 
+      
+      span.className = "letter";
+      span.style.animationDelay = `${index * 0.05}s`; // Slightly slower for a more graceful effect
+      container.appendChild(span);
+    });
+  });
+</script>
+{% endblock content %}

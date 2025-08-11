@@ -77,6 +77,12 @@ module.exports = {
               blink: 'blink 0.4s step-end infinite',
               slideInLeft: 'slideInLeft 1s ease-out forwards'
             },
+            fonts:{
+              is: "imperial-script-regular",
+              mo: "madimi-one-regular",
+              fg: "faculty-glyphic-regular",
+              fa: "faustina"
+            }
     },
     plugins: [
         /**

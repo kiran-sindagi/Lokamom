@@ -1,56 +1,68 @@
-{% extends "layout.html" %} {% block content %}
-<div class="flex justify-center items-center min-h-[60vh]">
+{% extends "layout.html" %}
+{% block content %}
+<div class="flex justify-center items-center min-h-[60vh] px-4">
   <form
     action=""
     method="POST"
     id="ask-question-form"
-    class="bg-white/90 rounded-xl shadow-lg border border-green-200 p-8 w-full max-w-xl backdrop-blur-md"
+    class="bg-white/90 rounded-xl shadow-lg border border-teal-200 p-8 w-full max-w-xl backdrop-blur-md"
   >
     {% csrf_token %}
-    <h2 class="text-2xl font-extrabold text-green-800 mb-4 text-center">
+    <h2 class="text-2xl font-extrabold text-[#0f766e] mb-6 text-center">
       Ask a Question
     </h2>
-    <label for="text" class="block text-green-800 font-semibold mb-2"
-      >Your Question</label
-    >
+
+    <!-- Label -->
+    <label for="text" class="block text-[#0f766e] font-semibold mb-2">
+      Your Question
+    </label>
+
+    <!-- Textarea -->
     <textarea
       placeholder="Type your question here..."
       name="quest"
-      class="w-full mt-1 h-40 px-4 py-2 rounded-lg border border-green-200 focus:ring-2 focus:ring-green-400 focus:outline-none bg-green-50 text-gray-800 resize-y transition"
       id="text"
       maxlength="500"
       required
+      class="w-full mt-1 h-40 px-4 py-2 rounded-lg border border-teal-200 focus:ring-2 focus:ring-[#0f766e] focus:outline-none bg-teal-50 text-gray-800 resize-y transition"
     ></textarea>
+
+    <!-- Buttons -->
     <div class="flex gap-5 mt-6 justify-center">
       <button
         type="submit"
-        class="px-6 py-2 font-bold rounded-lg bg-gradient-to-tr from-green-700 to-green-500 hover:from-green-800 hover:to-green-600 text-white shadow transition"
+        class="px-6 py-2 font-bold rounded-lg bg-gradient-to-tr from-[#0f766e] to-teal-500 hover:from-[#115e57] hover:to-teal-600 text-white shadow transition transform hover:scale-105"
       >
         Submit
       </button>
       <a
         href="{% url 'forums' %}"
-        class="px-6 py-2 rounded-lg bg-green-100 text-green-800 font-bold shadow hover:bg-green-200 transition text-center"
+        class="px-6 py-2 rounded-lg bg-teal-100 text-[#0f766e] font-bold shadow hover:bg-teal-200 transition text-center"
       >
         Cancel
       </a>
     </div>
+
+    <!-- Message -->
     <div
       id="message"
       style="display: none"
-      class="bg-green-700 flex h-10 items-center justify-center rounded-2xl mt-5 opacity-80 text-white"
+      class="bg-[#0f766e] flex h-10 items-center justify-center rounded-2xl mt-5 opacity-90 text-white animate-fadeIn"
     >
-      <p class="font-semibold">
-        Drag the bottom right corner to adjust the size.
+      <p class="font-semibold text-sm">
+        💡 Drag the bottom right corner to adjust the size.
       </p>
     </div>
   </form>
 </div>
+
+<!-- Script -->
 <script>
   document.cookie =
     "user_timezone=" +
     Intl.DateTimeFormat().resolvedOptions().timeZone +
     ";path=/";
+
   document
     .getElementById("ask-question-form")
     .addEventListener("submit", function () {
@@ -58,6 +70,7 @@
         window.location.href = "{% url 'forums' %}";
       }, 100);
     });
+
   const text = document.getElementById("text");
   window.addEventListener("pageshow", function (event) {
     if (!text) return;
@@ -66,6 +79,7 @@
       text.value = "";
     }
   });
+
   const msg = document.getElementById("message");
   text.addEventListener("input", () => {
     if (text.value.length > 400) {
@@ -76,4 +90,15 @@
     }
   });
 </script>
+
+<!-- Small Animation -->
+<style>
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-5px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .animate-fadeIn {
+    animation: fadeIn 0.4s ease-in-out;
+  }
+</style>
 {% endblock %}
