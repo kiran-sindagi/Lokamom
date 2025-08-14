@@ -95,10 +95,10 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'lokamom',
-        'USER': 'root',
-        'PASSWORD': 'root12345',
-        'HOST': 'localhost',
-        'PORT': '3306',
+        'USER': 'dbpbf03800803',
+        'PASSWORD': 'V04gu7S%eMrwZEQx}s909ffJ',
+        'HOST': 'serverless-northeurope.sysp0000.db3.skysql.com',
+        'PORT': '4174',
         'OPTIONS': {
             'charset': 'utf8mb4',
             'init_command': "SET sql_mode='STRICT_TRANS_TABLES'",
