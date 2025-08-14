@@ -94,11 +94,11 @@ WSGI_APPLICATION = 'lokamom.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'lokamom',
-        'USER': 'dbpbf03800803',
-        'PASSWORD': 'V04gu7S%eMrwZEQx}s909ffJ',
-        'HOST': 'serverless-northeurope.sysp0000.db3.skysql.com',
-        'PORT': '4174',
+        'NAME': os.environ.get('DB_NAME'),
+        'USER': os.environ.get('DB_USER'),
+        'PASSWORD': os.environ.get('DB_PASSWORD'),
+        'HOST': os.environ.get('DB_HOST'),
+        'PORT': os.environ.get('DB_PORT', '3306'),
         'OPTIONS': {
             'charset': 'utf8mb4',
             'init_command': "SET sql_mode='STRICT_TRANS_TABLES'",
