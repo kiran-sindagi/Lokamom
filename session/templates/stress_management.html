@@ -1,46 +1,66 @@
-{% extends 'about_layout.html' %}
-{% block content %}
-      <p class="text-2xl font-bold mb-6">🌼 What Happens in a Stress Management or Life Skills Session?</p>
-      <div class="space-y-6">
-        <div>
-          <p class="font-bold text-blue-700 italic mb-1">🧠 Understanding Stress</p>
-          <p class="text-base">Learn what stress really is—how it affects your mind, body, and behavior.<br>
-          Recognize your own signs of stress (fatigue, irritability, anxiety, sleeplessness).</p>
-        </div>
-        <div>
-          <p class="font-bold text-gray-700 italic mb-1">🛠️ Practical Coping Tools</p>
-          <p class="text-base">
-            Breathing exercises, grounding techniques, or journaling for emotional release.<br>
-            Time management tips for juggling responsibilities.<br>
-            How to set healthy boundaries without guilt.<br>
-            Building self-care habits—without needing extra money or time.
-          </p>
-        </div>
-        <div>
-          <p class="font-bold text-purple-700 italic mb-1">💬 Real-Life Discussions</p>
-          <p class="text-base">Everyday challenges—like saying no, asking for help, or handling conflict—are openly talked about.<br>
-          Participants share what’s worked for them, and learn from each other’s stories.</p>
-        </div>
-        <div>
-          <p class="font-bold text-green-700 italic mb-1">🌿 Emotional Support</p>
-          <p class="text-base">You’re not judged, advised, or “fixed.”<br>
-          You’re supported, validated, and encouraged.</p>
-        </div>
-        <div>
-          <p class="font-bold text-yellow-700 italic mb-1">💡 Life Skills Covered May Include:</p>
-          <ul class="list-disc space-y-2 pl-6 text-base">
-            <li>Self awareness and empathy</li>
-            <li>Communication and assertiveness</li>
-            <li>Problem-solving and decision-making</li>
-            <li>Emotional regulation and self-worth</li>
-            <li>Creative and critical thinking</li>
-            <li>Interpersonal relationship skills</li>
-            <li>Stress management</li>
-            <li>Parenting under stress</li>
-            <li>Work–life balance strategies</li>
-          </ul>
-        </div>
-      </div>
-  </div>
+{% extends 'home_layout.html' %}
 
+{% block content %}
+<section class="w-full max-w-4xl mx-auto p-6 mt-4 bg-white/50 rounded-lg shadow-sm text-teal-800">
+    
+    <h2 class="text-3xl font-bold mb-4 text-teal-900">
+        🌼 What Happens in a Stress Management Session?
+    </h2>
+    
+    <p class="text-base mb-8 leading-relaxed">
+        A stress management or life skills session is a supportive and practical gathering designed to help women cope with daily stress, build emotional strength, and learn essential tools to manage life more confidently. These sessions are especially helpful for those dealing with overwhelm, financial hardship, parenting pressures, burnout, or major life transitions.
+    </p>
+
+    <div class="space-y-8">
+        
+        <article>
+            <h3 class="text-lg font-bold text-blue-700 italic mb-2">🧠 Understanding Stress</h3>
+            <p class="text-base">
+                Learn what stress really is—how it affects your mind, body, and behavior. You'll learn to recognize your personal signs of stress, such as fatigue, irritability, anxiety, or sleeplessness.
+            </p>
+        </article>
+
+        <article>
+            <h3 class="text-lg font-bold text-gray-700 italic mb-2">🛠️ Practical Coping Tools</h3>
+            <p class="text-base">
+                Discover breathing exercises, grounding techniques, and journaling for emotional release. We cover time management, setting healthy boundaries without guilt, and building self-care habits that don't require extra money or time.
+            </p>
+        </article>
+        
+        <article>
+            <h3 class="text-lg font-bold text-purple-700 italic mb-2">💬 Real-Life Discussions</h3>
+            <p class="text-base">
+                Everyday challenges—like saying no, asking for help, or handling conflict—are discussed openly. Participants share personal stories and learn from each other in a safe, non-judgmental space.
+            </p>
+        </article>
+        
+        <article>
+            <h3 class="text-lg font-bold text-green-700 italic mb-2">🌿 Emotional Support</h3>
+            <p class="text-base">
+                You’re not here to be judged, advised, or “fixed.” In these sessions, you are supported, validated, and encouraged exactly as you are.
+            </p>
+        </article>
+
+        <article>
+            <h3 class="text-lg font-bold text-yellow-700 italic mb-2">💡 Life Skills Covered</h3>
+            <ul class="list-disc space-y-2 pl-6 text-base">
+                <li>Self-awareness and empathy</li>
+                <li>Communication and assertiveness</li>
+                <li>Problem-solving and decision-making</li>
+                <li>Emotional regulation and self-worth</li>
+                <li>Interpersonal relationship skills</li>
+                <li>Parenting under stress</li>
+                <li>Work–life balance strategies</li>
+            </ul>
+        </article>
+
+    </div>
+
+    <div class="text-center">
+      <a href="{% url 'book-stress-session' %}" class="inline-block bg-teal-700 text-white text-center font-semibold px-6 py-2 mt-8 rounded-md hover:bg-teal-800 transition-colors">
+          Register Now
+      </a>
+    </div>
+
+</section>
 {% endblock content %}

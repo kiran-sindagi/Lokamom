@@ -9,12 +9,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     {% tailwind_css %}
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
         /* This prevents the page from jumping when the scrollbar is hidden */
         body.overflow-hidden {
             padding-right: 15px; /* Adjust this value to your scrollbar's width */
         }
-
+        /* Fallback for browsers that don't support the above */
+        @media screen and (max-width: 768px) {
+            body.overflow-hidden {
+                padding-right: 0;
+            }
+        }
+        /* Applying the custom font */
+        .font-letter {
+            font-family: 'Cormorant Garamond', serif;
+        }
         /* Style the video to be a centered, full-screen background */
         #bg-video {
             position: fixed;
@@ -36,14 +49,14 @@
     </style>
 </head>
 <!-- Use flexbox to manage the layout of header and main content -->
-<body class="font-serif bg-orange-200 flex flex-col min-h-screen">
+<body class="font-sans bg-orange-200 flex flex-col min-h-screen" style="font-family: 'Inter', sans-serif;">
     {% comment %} <video id="bg-video" autoplay loop muted poster="path/to/fallback-image.jpg">
         <source src="{% static 'bgvid.mp4' %}" type="video/mp4">
         Your browser does not support the video tag.
     </video> {% endcomment %}
 
     <!-- Header -->
-    <header class="w-full flex justify-between items-center p-4 z-20 bg-orange-100 shadow-md">
+    <header class="w-full flex justify-between items-center p-4 z-20 bg-orange-100 shadow-md sticky top-0">
         <a href="{% url 'home' %}" class="text-2xl font-bold text-[#0f766e]">LokaMom</a>
 
         <!-- Desktop Navigation -->
@@ -51,14 +64,14 @@
             <a href="{% url 'about' %}" class="font-semibold text-[#0f766e] hover:text-teal-800 transition-colors duration-200">About</a>
             
             <!-- Articles Dropdown Menu -->
-            <div id="articles-dropdown-container" class="relative">
-                <button id="articles-dropdown-button" class="font-semibold text-[#0f766e] hover:text-teal-800 transition-colors duration-200 flex items-center">
+            <div class="relative dropdown-container">
+                <button class="dropdown-button font-semibold text-[#0f766e] hover:text-teal-800 transition-colors duration-200 flex items-center">
                     Articles
                     <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                 </button>
-                <div id="articles-dropdown-panel" class="absolute left-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-30 hidden">
+                <div class="dropdown-panel absolute left-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-30 hidden">
                     <a href="{% url 'section_articles' section='1' %}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-teal-800">The Professional</a>
-                    <a href="{% url 'section_articles' section='2' %}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-teal-800">A New Beggining</a>
+                    <a href="{% url 'section_articles' section='2' %}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-teal-800">A New Beginning</a>
                     <a href="{% url 'section_articles' section='3' %}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-teal-800">The Beautiful Bloom</a>
                     <a href="{% url 'section_articles' section='4' %}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-teal-800">Hello, World!</a>
                     <a href="{% url 'section_articles' section='5' %}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-teal-800">The New Balance</a>
@@ -68,12 +81,12 @@
             <a href="{% url 'forums' %}" class="font-semibold text-[#0f766e] hover:text-teal-800 transition-colors duration-200">Forums</a>
             
             <!-- More Dropdown Menu -->
-            <div id="more-dropdown-container" class="relative">
-                <button id="more-dropdown-button" class="font-semibold text-[#0f766e] hover:text-teal-800 transition-colors duration-200 flex items-center">
+            <div class="relative dropdown-container">
+                <button class="dropdown-button font-semibold text-[#0f766e] hover:text-teal-800 transition-colors duration-200 flex items-center">
                     More
                     <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                 </button>
-                <div id="more-dropdown-panel" class="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-30 hidden">
+                <div class="dropdown-panel absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-30 hidden">
                     <a href="{% url 'WISList' %}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-teal-800">Women in Spotlight</a>
                     <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-teal-800">Work/Career</a>
                     <a href="{% url 'letter' %}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-teal-800">Sessions</a>
@@ -98,10 +111,9 @@
     <div id="overlay" class="fixed inset-0 bg-black bg-opacity-50 z-30 hidden transition-opacity duration-300 ease-in-out"></div>
 
     <!-- Off-Canvas Sidebar (for mobile) -->
-    <div id="sidebar-menu" class="fixed top-0 right-0 h-full md:w-4/5 w-full md:max-w-sm z-40 bg-[#ADBCA5] shadow-2xl p-6 space-y-4 transform translate-x-full transition-transform duration-300 ease-in-out">
+    <div id="sidebar-menu" class="fixed top-0 right-0 h-full w-full max-w-sm z-40 bg-[#ADBCA5] shadow-2xl p-6 space-y-2 transform translate-x-full transition-transform duration-300 ease-in-out overflow-y-auto">
         
         <div class="flex justify-between items-center mb-6">
-            <h2 class="text-xl font-bold text-[#F9F6F2]">Menu</h2>
             <button id="menu-close-button" class="focus:outline-none text-[#F9F6F2] hover:text-white">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" 
                     viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -111,7 +123,22 @@
         </div>
 
         <a href="{% url 'about' %}" class="block py-2 px-3 rounded-md font-semibold text-[#F9F6F2] hover:bg-black/10 transition-colors duration-200">About</a>
-        <a href="{% url 'articles' %}" class="block py-2 px-3 rounded-md font-semibold text-[#F9F6F2] hover:bg-black/10 transition-colors duration-200">Articles</a>
+        
+        <!-- Mobile Articles Accordion -->
+        <div>
+            <button id="mobile-articles-button" class="w-full flex justify-between items-center py-2 px-3 rounded-md font-semibold text-[#F9F6F2] hover:bg-black/10 transition-colors duration-200">
+                <span>Articles</span>
+                <svg class="w-5 h-5 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+            </button>
+            <div id="mobile-articles-panel" class="hidden pl-6 pt-1 space-y-1">
+                <a href="{% url 'section_articles' section='1' %}" class="block py-1 px-3 text-sm rounded-md text-[#F9F6F2] hover:bg-black/10">The Professional</a>
+                <a href="{% url 'section_articles' section='2' %}" class="block py-1 px-3 text-sm rounded-md text-[#F9F6F2] hover:bg-black/10">A New Beginning</a>
+                <a href="{% url 'section_articles' section='3' %}" class="block py-1 px-3 text-sm rounded-md text-[#F9F6F2] hover:bg-black/10">The Beautiful Bloom</a>
+                <a href="{% url 'section_articles' section='4' %}" class="block py-1 px-3 text-sm rounded-md text-[#F9F6F2] hover:bg-black/10">Hello, World!</a>
+                <a href="{% url 'section_articles' section='5' %}" class="block py-1 px-3 text-sm rounded-md text-[#F9F6F2] hover:bg-black/10">The New Balance</a>
+            </div>
+        </div>
+
         <a href="{% url 'forums' %}" class="block py-2 px-3 rounded-md font-semibold text-[#F9F6F2] hover:bg-black/10 transition-colors duration-200">Forums</a>
         <a href="{% url 'WISList' %}" class="block py-2 px-3 rounded-md font-semibold text-[#F9F6F2] hover:bg-black/10 transition-colors duration-200">Women in Spotlight</a>
         <a href="#" class="block py-2 px-3 rounded-md font-semibold text-[#F9F6F2] hover:bg-black/10 transition-colors duration-200">Work/Career</a>
@@ -126,7 +153,7 @@
     </main>
 
     <!-- Footer -->
-    <footer class="bg-orange-100/80 backdrop-blur-sm shadow-inner mt-auto w-full z-10">
+    <footer class="bg-orange-100/80 backdrop-blur-sm shadow-inner mt-5 w-full z-10">
         <div class="container mx-auto py-6 px-4">
             <div class="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
                 <div class="text-center md:text-left">
@@ -143,7 +170,8 @@
     </footer>
 
 <script>
-    // --- Sidebar Logic (unchanged) ---
+document.addEventListener('DOMContentLoaded', function() {
+    // --- Sidebar Logic ---
     const openMenuButton = document.getElementById('menu-open-button');
     const closeMenuButton = document.getElementById('menu-close-button');
     const sidebar = document.getElementById('sidebar-menu');
@@ -172,53 +200,54 @@
         }
     });
 
-    // --- Dropdown Menu Logic ---
-    const moreDropdownButton = document.getElementById('more-dropdown-button');
-    const moreDropdownPanel = document.getElementById('more-dropdown-panel');
-    const moreDropdownContainer = document.getElementById('more-dropdown-container');
+    // --- Desktop Dropdown Menu Logic ---
+    const dropdownButtons = document.querySelectorAll('.dropdown-button');
 
-    const articlesDropdownButton = document.getElementById('articles-dropdown-button');
-    const articlesDropdownPanel = document.getElementById('articles-dropdown-panel');
-    const articlesDropdownContainer = document.getElementById('articles-dropdown-container');
-
-    // "More" Dropdown
-    if (moreDropdownButton) {
-        moreDropdownButton.addEventListener('click', (event) => {
+    dropdownButtons.forEach(button => {
+        button.addEventListener('click', (event) => {
             event.stopPropagation();
-            moreDropdownPanel.classList.toggle('hidden');
-            // Hide articles dropdown if open
-            if (articlesDropdownPanel && !articlesDropdownPanel.classList.contains('hidden')) {
-                articlesDropdownPanel.classList.add('hidden');
-            }
-        });
-    }
+            const currentPanel = button.nextElementSibling;
 
-    // "Articles" Dropdown
-    if (articlesDropdownButton) {
-        articlesDropdownButton.addEventListener('click', (event) => {
-            event.stopPropagation();
-            articlesDropdownPanel.classList.toggle('hidden');
-            // Hide more dropdown if open
-            if (moreDropdownPanel && !moreDropdownPanel.classList.contains('hidden')) {
-                moreDropdownPanel.classList.add('hidden');
-            }
+            // Close all other dropdowns before opening the new one
+            document.querySelectorAll('.dropdown-panel').forEach(panel => {
+                if (panel !== currentPanel && !panel.classList.contains('hidden')) {
+                    panel.classList.add('hidden');
+                }
+            });
+
+            // Toggle the clicked dropdown
+            currentPanel.classList.toggle('hidden');
         });
-    }
+    });
 
     // Close dropdowns when clicking anywhere else on the page
     window.addEventListener('click', (event) => {
-        if (moreDropdownContainer && !moreDropdownContainer.contains(event.target)) {
-            if (!moreDropdownPanel.classList.contains('hidden')) {
-                moreDropdownPanel.classList.add('hidden');
-            }
-        }
-        if (articlesDropdownContainer && !articlesDropdownContainer.contains(event.target)) {
-            if (!articlesDropdownPanel.classList.contains('hidden')) {
-                articlesDropdownPanel.classList.add('hidden');
-            }
+        // Check if the click is outside any dropdown container
+        if (!event.target.closest('.dropdown-container')) {
+            document.querySelectorAll('.dropdown-panel').forEach(panel => {
+                panel.classList.add('hidden');
+            });
         }
     });
 
+    // --- Mobile Accordion Logic ---
+    const mobileArticlesButton = document.getElementById('mobile-articles-button');
+    const mobileArticlesPanel = document.getElementById('mobile-articles-panel');
+    const mobileArticlesArrow = mobileArticlesButton.querySelector('svg');
+
+    if (mobileArticlesButton) {
+        mobileArticlesButton.addEventListener('click', () => {
+            const isHidden = mobileArticlesPanel.classList.contains('hidden');
+            if (isHidden) {
+                mobileArticlesPanel.classList.remove('hidden');
+                mobileArticlesArrow.style.transform = 'rotate(180deg)';
+            } else {
+                mobileArticlesPanel.classList.add('hidden');
+                mobileArticlesArrow.style.transform = 'rotate(0deg)';
+            }
+        });
+    }
+});
 </script>
 
 </body>

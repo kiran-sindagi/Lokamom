@@ -4,22 +4,38 @@ from django.contrib import messages # type: ignore
 from django.contrib.auth.forms import UserCreationForm # type: ignore
 from .forms import RegisterUserForm, ProfileUpdateForm, UserUpdateForm
 from django.contrib.auth.decorators import login_required  # type: ignore
+from django.utils.http import url_has_allowed_host_and_scheme
 
 # Create your views here.
 
 def loginUser(request):
-    if request.method=="POST":
+    # Get the 'next' parameter from the GET request, e.g., /login/?next=/some/url/
+    next_page = request.GET.get('next')
+
+    if request.method == "POST":
         username = request.POST['username']
         password = request.POST['password']
-        user = authenticate(request, username = username, password = password)
+        
+        # Get 'next' from the form's hidden input on POST
+        next_page = request.POST.get('next')
+
+        user = authenticate(request, username=username, password=password)
+
         if user is not None:
             login(request, user)
-            return redirect('home')
+            
+            # Security check: Ensure the redirect URL is on the same host
+            if next_page and url_has_allowed_host_and_scheme(url=next_page, allowed_hosts={request.get_host()}):
+                return redirect(next_page)
+            else:
+                return redirect('forums')  # Default redirect
         else:
-            messages.success(request, ("There was an error logging in."))
-            return redirect('login')
-    else:
-        return render(request, 'userPages/login.html', {})
+            messages.error(request, "Invalid username or password.")
+            # Pass next_page back to the template on failed login
+            return render(request, 'userPages/login.html', {'next': next_page})
+
+    # Pass the 'next' parameter to the template context on GET request
+    return render(request, 'userPages/login.html', {'next': next_page})
     
 def logoutUser(request):
     logout(request)

@@ -1,40 +1,55 @@
 {% extends 'home_layout.html' %}
 
 {% block content %}
-<div>
-      <h2 class="text-3xl font-bold mb-6 text-[#0f766e]">Here’s what makes group talks special:</h2>
+<section class="w-full max-w-4xl mx-auto p-6 mt-4 bg-white/50 rounded-lg shadow-sm text-teal-800">
+    
+    <h2 class="text-3xl font-bold mb-4 text-teal-900">
+        Here’s What Makes Group Talks Special
+    </h2>
+    
+    <p class="text-base mb-8 leading-relaxed">
+        Group counseling sessions are relaxed, supportive gatherings where people with similar life experiences come together to talk and share. They feel less like formal meetings and more like a heartfelt conversation in a safe circle, where everyone is heard, seen, and accepted.
+    </p>
 
-  <div class="space-y-6">
+    <div class="space-y-8">
+        
+        <article>
+            <h3 class="text-lg font-bold text-green-700 italic mb-2">🌿 Casual and Comfortable</h3>
+            <p class="text-base">The setting is warm and welcoming, without pressure to "perform" or speak if you don't feel like it. It might be in a cozy room, a community space, or even online.</p>
+        </article>
 
-    <div>
-      <p class="font-bold text-green-700 italic mb-1">🌿 Casual and comfortable</p>
-      <p class="text-base">The setting is warm and welcoming. It might take place in a cozy room, a community space, or even online—without pressure to "perform" or speak if you don't feel like it.</p>
+        <article>
+            <h3 class="text-lg font-bold text-yellow-700 italic mb-2">🤝 Shared Experiences</h3>
+            <p class="text-base">You meet others navigating similar challenges like motherhood, career stress, or emotional overload. Just knowing you're not alone is incredibly healing.</p>
+        </article>
+        
+        <article>
+            <h3 class="text-lg font-bold text-purple-700 italic mb-2">💬 Open Conversations</h3>
+            <p class="text-base">People talk about real struggles—juggling roles, guilt, exhaustion, self-doubt—and others listen. It builds a sense of <em>togetherness</em>, not judgment.</p>
+        </article>
+        
+        <article>
+            <h3 class="text-lg font-bold text-orange-700 italic mb-2">🎗️ Guided by a Facilitator</h3>
+            <p class="text-base">A trained counselor gently guides the flow, asking thoughtful questions, keeping the space safe, and helping people explore their thoughts with care and respect.</p>
+        </article>
+
+        <article>
+            <h3 class="text-lg font-bold text-pink-700 italic mb-2">🌸 Healing Through Connection</h3>
+            <p class="text-base">Hearing someone else say “I’ve felt that too” is deeply reassuring. It reminds you that your feelings are valid and that there is strength in vulnerability.</p>
+        </article>
+
     </div>
 
-    <div>
-      <p class="font-bold text-yellow-700 italic mb-1">🤝 Shared experiences</p>
-      <p class="text-base">You meet other women who are also navigating motherhood, career stress, emotional overload, or similar challenges. Just knowing you're not alone is incredibly healing.</p>
+    <div class="mt-8 text-center border-t border-teal-100 pt-6">
+        <p class="font-bold text-lg text-teal-900">Group talk isn’t about giving advice—it’s about being there for one another.</p>
+        <p class="text-base mt-2">It’s perfect for anyone craving connection, emotional release, or simply a space to just <em>be themselves</em>, without masks.</p>
     </div>
 
-    <div>
-      <p class="font-bold text-purple-700 italic mb-1">💬 Open conversations</p>
-      <p class="text-base">People talk about real struggles—juggling roles, guilt, exhaustion, self-doubt—and others listen, nod, or share their own journey. It builds a sense of <em>togetherness</em>, not judgment.</p>
+    <div class="text-center">
+        <a href="{% url 'book-group-session' %}" class="inline-block bg-teal-700 text-white text-center font-semibold px-6 py-2 mt-8 rounded-md hover:bg-teal-800 transition-colors">
+            Register Now
+        </a>
     </div>
 
-    <div>
-      <p class="font-bold text-yellow-700 italic mb-1">🎗️ Facilitated by a counsellor</p>
-      <p class="text-base">There’s usually a trained counsellor guiding the flow—asking gentle questions, keeping the space safe, and helping people explore their thoughts with care and respect.</p>
-    </div>
-
-    <div>
-      <p class="font-bold text-pink-700 italic mb-1">🌸 Healing through connection</p>
-      <p class="text-base">Hearing someone else say “I’ve felt that too” can be deeply reassuring. It reminds you that your feelings are valid—and that there’s strength in vulnerability.</p>
-    </div>
-
-  </div>
-
-  <p class="font-bold my-5">Group talk is not about giving advice—it’s about being there for one another.</p>
-
-  <p class="text-base">It’s perfect for women who are craving connection, emotional release, or simply a space to just <em>be themselves</em>, without masks.</p>
-</div>
+</section>
 {% endblock content %}

@@ -60,7 +60,12 @@
                     <a href="{% url 'section_articles' section='5' %}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-teal-800">The New Balance</a>
                 </div>
             </div>
-
+            <form method="get" action="{% url 'search_post' %}" class="flex justify-center w-full max-w-xl relative">
+                <input id="searchInput" type="text" name="q" placeholder="Search posts..." value="{{ request.GET.q }}" class="w-full py-3 px-5 rounded-full bg-[#0f766e]/10 text-black placeholder-gray-500 shadow focus:outline-none focus:ring-2 focus:ring-[#0f766e] transition"/>
+                <button type="submit" class="absolute right-2 top-1/2 -translate-y-1/2">
+                    <img src="{% static 'search2.png' %}" alt="Search Icon" class="w-8 bg-transparent"/>
+                </button>
+            </form>
             <a href="{% url 'forums' %}" class="font-semibold text-[#0f766e] hover:text-teal-800 transition-colors duration-200">Forums</a>
             
             <!-- More Dropdown Menu -->
@@ -123,7 +128,6 @@
     <div id="sidebar-menu" class="fixed top-0 right-0 h-full md:w-4/5 w-full md:max-w-sm z-40 bg-[#ADBCA5] shadow-2xl p-6 space-y-4 transform translate-x-full transition-transform duration-300 ease-in-out">
         
         <div class="flex justify-between items-center mb-6">
-            <h2 class="text-xl font-bold text-[#F9F6F2]">Menu</h2>
             <button id="menu-close-button" class="focus:outline-none text-[#F9F6F2] hover:text-white">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" 
                      viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -131,7 +135,12 @@
                 </svg>
             </button>
         </div>
-
+        <form method="get" action="{% url 'search_post' %}" class="flex justify-center w-full max-w-xl relative">
+            <input id="searchInput" type="text" name="q" placeholder="Search posts..." value="{{ request.GET.q }}" class="w-full py-3 px-5 rounded-full bg-[#0f766e]/10 text-black placeholder-gray-500 shadow focus:outline-none focus:ring-2 focus:ring-[#0f766e] transition"/>
+            <button type="submit" class="absolute right-2 top-1/2 -translate-y-1/2">
+                <img src="{% static 'search2.png' %}" alt="Search Icon" class="w-8 bg-transparent"/>
+            </button>
+        </form>
         <a href="{% url 'about' %}" class="block py-2 px-3 rounded-md font-semibold text-[#F9F6F2] hover:bg-black/10 transition-colors duration-200">About</a>
         <a href="{% url 'articles' %}" class="block py-2 px-3 rounded-md font-semibold text-[#F9F6F2] hover:bg-black/10 transition-colors duration-200">Articles</a>
         <a href="{% url 'forums' %}" class="block py-2 px-3 rounded-md font-semibold text-[#F9F6F2] hover:bg-black/10 transition-colors duration-200">Forums</a>
@@ -151,29 +160,6 @@
 
     <!-- Main Content -->
     <main class="w-full container mx-auto flex-grow flex items-center justify-start flex-col z-10 px-4 pt-8">
-        <!-- Search Bar -->
-        <form
-            method="get"
-            action="{% url 'search_post' %}"
-            class="mb-8 flex justify-center w-full max-w-xl relative"
-          >
-            <input
-              id="searchInput"
-              type="text"
-              name="q"
-              placeholder="Search posts..."
-              value="{{ request.GET.q }}"
-              class="w-full px-5 py-3 rounded-full bg-[#0f766e]/10 text-black placeholder-gray-500 shadow focus:outline-none focus:ring-2 focus:ring-[#0f766e] transition"
-            />
-            <button type="submit" class="absolute right-2 top-1/2 -translate-y-1/2">
-              <img
-                src="{% static 'search2.png' %}"
-                alt="Search Icon"
-                class="w-8 bg-transparent"
-              />
-            </button>
-          </form>
-
         <div class="w-full max-w-3xl">
             {% block content %}
             {% endblock %}
