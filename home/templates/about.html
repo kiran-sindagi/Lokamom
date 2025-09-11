@@ -1,112 +1,115 @@
-{% extends "home_layout.html" %} 
+{% extends "home_layout.html" %}
 {% load static %}
+
+<title>About LokaMom - Supporting Women Through Every Stage of Life</title>
+<meta name="description" content="LokaMom is a curated platform for women on their journey through life. Find articles, community forums, and support for career, marriage, motherhood, and personal growth.">
+
+<meta property="og:title" content="About LokaMom - Supporting Women Through Every Stage of Life">
+<meta property="og:description" content="LokaMom is a curated platform for women on their journey through life. Find articles, community forums, and support for career, marriage, motherhood, and personal growth.">
+<meta property="og:image" content="{% static 'fives/sora_2.png' %}">
+<meta property="og:url" content="{{ request.build_absolute_uri }}">
+<meta property="og:type" content="website">
+
 {% block content %}
 <div class="flex flex-col items-center justify-center container mx-auto px-4 pb-44 sm:pb-0 sm:mb-0 mt-3">
-    <h1 class="text-4xl fraunces font-extrabold text-[#0f766e] mb-6 tracking-tight">
-        About
-    </h1>
-    <!-- Main text container -->
+  <h1 class="text-4xl fraunces font-extrabold text-[#0f766e] mb-6 tracking-tight">
+    About
+  </h1>
     <div class="h-full w-full max-w-4xl px-6 py-5 md:px-10 text-[17px] bg-[#FFFBF2] text-[#0f766e] rounded-xl shadow-lg mb-10">
-        <p class="my-2 leading-relaxed">
-            <b class="text-[#0f766e]">The Ever-Evolving Journey of Womanhood</b>
-            <br />
-            As women, we transform gracefully through every phase of life—first as
-            daughters, then as partners, mothers, and, most importantly, as
-            individuals. Just as nature constantly evolves, so do we. Each stage of
-            our journey reveals a new version of ourselves—physically, emotionally,
-            and spiritually—with shifting priorities and fresh challenges. Isn’t it
-            extraordinary to experience life through such rich and varied lenses?
-            Indeed, we never fail as women—we only grow stronger and wiser.
-            <br /><br /><b class="text-[#0f766e]">Welcome to LokaMom </b><br />
-            LokaMom is a thoughtfully curated space, created exclusively for women who
-            are continually evolving and embracing growth at every stage of life.
-        </p>
-    </div>
+    <p class="my-2 leading-relaxed">
+      <b class="text-[#0f766e]">The Ever-Evolving Journey of Womanhood</b>
+      <br />
+      As women, we transform gracefully through every phase of life—first as
+      daughters, then as partners, mothers, and, most importantly, as
+      individuals. Just as nature constantly evolves, so do we. Each stage of
+      our journey reveals a new version of ourselves—physically, emotionally,
+      and spiritually—with shifting priorities and fresh challenges. Isn’t it
+      extraordinary to experience life through such rich and varied lenses?
+      Indeed, we never fail as women—we only grow stronger and wiser.
+      <br /><br /><b class="text-[#0f766e]">Welcome to LokaMom </b><br />
+      LokaMom is a thoughtfully curated space, created exclusively for women who
+      are continually evolving and embracing growth at every stage of life.
+    </p>
+  </div>
 
-    <!-- Flex container for the cards -->
     <div class="flex flex-wrap gap-8 justify-center mb-12 w-full">
-        <!-- Card 1 -->
         <div class="relative group flex-1 min-w-[16rem] max-w-xs h-44 rounded-xl text-[#fff] flex items-center justify-center shadow-md hover:shadow-xl transition-shadow duration-300 bg-contain bg-no-repeat bg-center" style="background-image: url({% static 'fives/saree_working1.jpg' %});">
-            <span class="font-bold text-lg text-center px-3">
-                Your Companion Through the Journey of Womanhood
-            </span>
-            <div class="absolute bottom-full mb-2 left-0 w-full p-4 bg-[#FFFBF2] text-[#0f766e] opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 shadow-xl rounded-xl z-10 text-sm transform translate-y-2 group-hover:translate-y-0">
-                <a href="{% url 'articles' %}">
-                    Our platform offers dedicated sections tailored to the distinct phases
-                    of womanhood—whether you're pursuing a career, exploring marriage,
-                    preparing for motherhood, navigating pregnancy, or balancing the
-                    demands of parenting with professional life. For each of these
-                    milestones, you'll find insightful articles, expert advice, and
-                    relevant information designed to support and empower you.
-                </a>
-            </div>
-        </div>
-
-        <!-- Card 2 -->
-        <div class="relative group flex-1 min-w-[16rem] max-w-xs h-44 rounded-xl text-[#fff] flex items-center justify-center shadow-md hover:shadow-xl transition-shadow duration-300 bg-contain bg-no-repeat bg-center" style="background-image: url({% static 'fives/sora_2.png' %});">
-            <span class="font-bold text-lg text-center px-3">
-                A Space to Share, Learn, and Connect
-            </span>
-            <div class="absolute bottom-full mb-2 left-0 w-full p-4 bg-[#FFFBF2] text-[#0f766e] opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 shadow-xl rounded-xl z-10 text-sm transform translate-y-2 group-hover:translate-y-0">
-                <a href="{% url 'forums' %}">
-                    We also host a vibrant forum where women can engage in meaningful
-                    discussions on topics such as careers, pregnancy, work-life balance,
-                    and more. Whether you choose to share your thoughts openly or
-                    participate anonymously, all voices are welcome. Simply log in to post
-                    your questions, answers, or reflections.
-                </a>
-            </div>
-        </div>
-
-        <!-- Card 3 -->
-        <div class="relative group flex-1 min-w-[16rem] max-w-xs h-44 rounded-xl text-[#fff] flex items-center justify-center shadow-md hover:shadow-xl transition-shadow duration-300 bg-contain bg-no-repeat bg-center" style="background-image: url({% static 'fives/sora_3.png' %});">
-            <span class="font-bold text-lg text-center px-3">
-                Celebrating Unsung Heroines
-            </span>
-            <div class="absolute bottom-full mb-2 left-0 w-full p-4 bg-[#FFFBF2] text-[#0f766e] opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 shadow-xl rounded-xl z-10 text-sm transform translate-y-2 group-hover:translate-y-0">
-                <a href="{% url 'WISList' %}">
-                    LokaMom features a special section that highlights women who inspire
-                    others through their quiet strength and contributions. These are the
-                    trailblazers who may not seek recognition but truly deserve it. If you
-                    are one of them—or if you know someone whose story should be told—we
-                    invite you to share their details so we can honor them on our
-                    platform.
-                </a>
-            </div>
-        </div>
-
-        <!-- Card 4 -->
-        <div class="relative group flex-1 min-w-[16rem] max-w-xs h-44 rounded-xl text-[#fff] flex items-center justify-center shadow-md hover:shadow-xl transition-shadow duration-300 bg-contain bg-no-repeat bg-center" style="background-image: url({% static 'fives/sora_4.png' %});">
-            <span class="font-bold text-lg text-center px-3">
-                Empowering Your Professional Journey
-            </span>
-            <div class="absolute bottom-full mb-2 left-0 w-full p-4 bg-[#FFFBF2] text-[#0f766e] opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 shadow-xl rounded-xl z-10 text-sm transform translate-y-2 group-hover:translate-y-0">
-                <a href="#">
-                    Our career and employability hub offers access to remote job
-                    opportunities, curated job listings, and links to resources that align
-                    with your lifestyle and ambitions. Whether you’re re-entering the
-                    workforce or seeking flexibility, we’re here to support your
-                    professional growth.
-                </a>
-            </div>
-        </div>
-
-        <!-- Card 5 -->
-        <div class="relative group flex-1 min-w-[16rem] max-w-xs h-44 rounded-xl text-[#fff] flex items-center justify-center shadow-md hover:shadow-xl transition-shadow duration-300 bg-contain bg-no-repeat bg-center" style="background-image: url({% static 'fives/sora_5.png' %});">
-            <span class="font-bold text-lg text-center px-3">
-                Supporting Mental and Emotional Well-being
-            </span>
-            <div class="absolute bottom-full mb-2 left-0 w-full p-4 bg-[#FFFBF2] text-[#0f766e] opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 shadow-xl rounded-xl z-10 text-sm transform translate-y-2 group-hover:translate-y-0">
-                <a href="{% url 'letter' %}">
-                    LokaMom is also committed to nurturing your inner world. Our content
-                    covers essential topics such as mental health, managing postpartum
-                    depression, stress relief, interpersonal relationships, and
-                    communication skills. For deeper support, we organize group
-                    discussions, mental health education and offer personalized one-on-one
-                    counseling sessions tailored to your unique needs.
-                </a>
-            </div>
-        </div>
+      <span class="font-bold text-lg text-center px-3">
+        Your Companion Through the Journey of Womanhood
+      </span>
+      <div class="absolute bottom-full mb-2 left-0 w-full p-4 bg-[#FFFBF2] text-[#0f766e] opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 shadow-xl rounded-xl z-10 text-sm transform translate-y-2 group-hover:translate-y-0">
+        <a href="{% url 'articles' %}">
+          Our platform offers dedicated sections tailored to the distinct phases
+          of womanhood—whether you're pursuing a career, exploring marriage,
+          preparing for motherhood, navigating pregnancy, or balancing the
+          demands of parenting with professional life. For each of these
+          milestones, you'll find insightful articles, expert advice, and
+          relevant information designed to support and empower you.
+        </a>
+      </div>
     </div>
+
+        <div class="relative group flex-1 min-w-[16rem] max-w-xs h-44 rounded-xl text-[#fff] flex items-center justify-center shadow-md hover:shadow-xl transition-shadow duration-300 bg-contain bg-no-repeat bg-center" style="background-image: url({% static 'fives/sora_2.png' %});">
+      <span class="font-bold text-lg text-center px-3">
+        A Space to Share, Learn, and Connect
+      </span>
+      <div class="absolute bottom-full mb-2 left-0 w-full p-4 bg-[#FFFBF2] text-[#0f766e] opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 shadow-xl rounded-xl z-10 text-sm transform translate-y-2 group-hover:translate-y-0">
+        <a href="{% url 'forums' %}">
+          We also host a vibrant forum where women can engage in meaningful
+          discussions on topics such as careers, pregnancy, work-life balance,
+          and more. Whether you choose to share your thoughts openly or
+          participate anonymously, all voices are welcome. Simply log in to post
+          your questions, answers, or reflections.
+        </a>
+      </div>
+    </div>
+
+        <div class="relative group flex-1 min-w-[16rem] max-w-xs h-44 rounded-xl text-[#fff] flex items-center justify-center shadow-md hover:shadow-xl transition-shadow duration-300 bg-contain bg-no-repeat bg-center" style="background-image: url({% static 'fives/sora_3.png' %});">
+      <span class="font-bold text-lg text-center px-3">
+        Celebrating Unsung Heroines
+      </span>
+      <div class="absolute bottom-full mb-2 left-0 w-full p-4 bg-[#FFFBF2] text-[#0f766e] opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 shadow-xl rounded-xl z-10 text-sm transform translate-y-2 group-hover:translate-y-0">
+        <a href="{% url 'WISList' %}">
+          LokaMom features a special section that highlights women who inspire
+          others through their quiet strength and contributions. These are the
+          trailblazers who may not seek recognition but truly deserve it. If you
+          are one of them—or if you know someone whose story should be told—we
+          invite you to share their details so we can honor them on our
+          platform.
+        </a>
+      </div>
+    </div>
+
+        <div class="relative group flex-1 min-w-[16rem] max-w-xs h-44 rounded-xl text-[#fff] flex items-center justify-center shadow-md hover:shadow-xl transition-shadow duration-300 bg-contain bg-no-repeat bg-center" style="background-image: url({% static 'fives/sora_4.png' %});">
+      <span class="font-bold text-lg text-center px-3">
+        Empowering Your Professional Journey
+      </span>
+      <div class="absolute bottom-full mb-2 left-0 w-full p-4 bg-[#FFFBF2] text-[#0f766e] opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 shadow-xl rounded-xl z-10 text-sm transform translate-y-2 group-hover:translate-y-0">
+        <a href="#">
+          Our career and employability hub offers access to remote job
+          opportunities, curated job listings, and links to resources that align
+          with your lifestyle and ambitions. Whether you’re re-entering the
+          workforce or seeking flexibility, we’re here to support your
+          professional growth.
+        </a>
+      </div>
+    </div>
+
+        <div class="relative group flex-1 min-w-[16rem] max-w-xs h-44 rounded-xl text-[#fff] flex items-center justify-center shadow-md hover:shadow-xl transition-shadow duration-300 bg-contain bg-no-repeat bg-center" style="background-image: url({% static 'fives/sora_5.png' %});">
+      <span class="font-bold text-lg text-center px-3">
+        Supporting Mental and Emotional Well-being
+      </span>
+      <div class="absolute bottom-full mb-2 left-0 w-full p-4 bg-[#FFFBF2] text-[#0f766e] opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 shadow-xl rounded-xl z-10 text-sm transform translate-y-2 group-hover:translate-y-0">
+        <a href="{% url 'letter' %}">
+          LokaMom is also committed to nurturing your inner world. Our content
+          covers essential topics such as mental health, managing postpartum
+          depression, stress relief, interpersonal relationships, and
+          communication skills. For deeper support, we organize group
+          discussions, mental health education and offer personalized one-on-one
+          counseling sessions tailored to your unique needs.
+        </a>
+      </div>
+    </div>
+  </div>
 </div>
 {% endblock content %}

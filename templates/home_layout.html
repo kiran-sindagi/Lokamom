@@ -88,9 +88,9 @@
                 </button>
                 <div class="dropdown-panel absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-30 hidden">
                     <a href="{% url 'WISList' %}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-teal-800">Women in Spotlight</a>
-                    <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-teal-800">Work/Career</a>
+                    <a href="{% url 'work-career' %}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-teal-800">Work/Career</a>
                     <a href="{% url 'letter' %}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-teal-800">Sessions</a>
-                    <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-teal-800">Contribute</a>
+                    <a href="{% url 'contribute' %}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-teal-800">Contribute</a>
                 </div>
             </div>
         </nav>
@@ -141,9 +141,9 @@
 
         <a href="{% url 'forums' %}" class="block py-2 px-3 rounded-md font-semibold text-[#F9F6F2] hover:bg-black/10 transition-colors duration-200">Forums</a>
         <a href="{% url 'WISList' %}" class="block py-2 px-3 rounded-md font-semibold text-[#F9F6F2] hover:bg-black/10 transition-colors duration-200">Women in Spotlight</a>
-        <a href="#" class="block py-2 px-3 rounded-md font-semibold text-[#F9F6F2] hover:bg-black/10 transition-colors duration-200">Work/Career</a>
+        <a href="{% url 'work-career' %}" class="block py-2 px-3 rounded-md font-semibold text-[#F9F6F2] hover:bg-black/10 transition-colors duration-200">Work/Career</a>
         <a href="{% url 'letter' %}" class="block py-2 px-3 rounded-md font-semibold text-[#F9F6F2] hover:bg-black/10 transition-colors duration-200">Sessions</a>
-        <a href="#" class="block py-2 px-3 rounded-md font-semibold text-[#F9F6F2] hover:bg-black/10 transition-colors duration-200">Contribute</a>
+        <a href="{% url 'contribute' %}" class="block py-2 px-3 rounded-md font-semibold text-[#F9F6F2] hover:bg-black/10 transition-colors duration-200">Contribute</a>
     </div>
 
     <!-- Main Content -->
@@ -153,21 +153,35 @@
     </main>
 
     <!-- Footer -->
-    <footer class="bg-orange-100/80 backdrop-blur-sm shadow-inner mt-5 w-full z-10">
-        <div class="container mx-auto py-6 px-4">
-            <div class="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
-                <div class="text-center md:text-left">
-                    <p class="text-sm text-teal-700">&copy; {% now "Y" %} Lokamom. All Rights Reserved.</p>
-                    <p class="text-sm text-teal-700 mt-1">Made with ❤️ for moms everywhere.</p>
-                </div>
-                <div class="flex justify-center space-x-6">
-                    <a href="{% url 'about' %}" class="text-sm text-teal-800 hover:text-teal-900 transition-colors">About</a>
-                    <a href="#" class="text-sm text-teal-800 hover:text-teal-900 transition-colors">Contact</a>
-                    <a href="#" class="text-sm text-teal-800 hover:text-teal-900 transition-colors">Privacy</a>
-                </div>
+<footer class="bg-gradient-to-r from-orange-100 via-orange-200 to-orange-100 backdrop-blur-md shadow-inner mt-auto w-full z-10">
+    <div class="container mx-auto py-4 px-6">
+        <div class="flex flex-col md:flex-row justify-between items-center space-y-6 md:space-y-0">
+            
+            <!-- Left Side -->
+            <div class="text-center md:text-left">
+                <h3 class="text-lg font-semibold text-teal-800">Lokamom</h3>
+                <p class="text-sm text-teal-700 mt-1">&copy; {% now "Y" %} Lokamom. All Rights Reserved.</p>
+                
+            </div>
+            <p class="text-sm text-teal-700">Made with ❤️ for moms everywhere.</p>
+            <!-- Right Side -->
+            <div class="flex space-x-6">
+                <a href="{% url 'about' %}" 
+                   class="text-sm font-medium text-teal-800 hover:text-white hover:bg-teal-600 px-3 py-1 rounded-md transition-colors duration-300">
+                   About
+                </a>
+                <a href="{% url 'forums' %}" 
+                   class="text-sm font-medium text-teal-800 hover:text-white hover:bg-teal-600 px-3 py-1 rounded-md transition-colors duration-300">
+                   Forums
+                </a>
+                <a href="{% url 'contribute' %}" 
+                   class="text-sm font-medium text-teal-800 hover:text-white hover:bg-teal-600 px-3 py-1 rounded-md transition-colors duration-300">
+                   Contribute
+                </a>
             </div>
         </div>
-    </footer>
+    </div>
+</footer>
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
