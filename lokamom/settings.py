@@ -26,8 +26,8 @@ SECRET_KEY = config('THE_SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config('MY_DEBUG', cast=bool)
 
-ALLOWED_HOSTS = ['*', '65.0.68.248']
-
+ALLOWED_HOSTS = ['*', '65.0.68.248',"www.lokamom.com","lokamom.com"]
+SECURE_SSL_REDIRECT = False
 
 # Application definition
 
